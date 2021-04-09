@@ -22,4 +22,8 @@ public class CategoriaService {
 								+ ", Tipo: " + Categoria.class.getName()));
 	}
 
+	
+	public Categoria insert (Categoria obj) {
+		return dao.save(obj);
+	}
 }
