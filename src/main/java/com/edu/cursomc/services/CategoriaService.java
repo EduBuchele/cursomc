@@ -3,10 +3,12 @@ package com.edu.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.edu.cursomc.domain.Categoria;
 import com.edu.cursomc.repositories.CategoriaRepository;
+import com.edu.cursomc.services.exceptions.DataIntegrityExceptionException;
 import com.edu.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -32,5 +34,15 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return dao.save(obj);
+	}
+
+
+	public void delete(Integer id) {
+		try {
+			dao.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new DataIntegrityExceptionException("Não é possível excluir categoria que contem produtos vinculados.");
+		}
+		
 	}
 }
