@@ -35,6 +35,8 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
+		Categoria newObjt = find(obj.getId());
+		updateData(newObjt, obj);
 		find(obj.getId());
 		return dao.save(obj);
 	}
@@ -60,6 +62,10 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
+	
+	private void updateData(Categoria newObjt, Categoria obj) {
+		newObjt.setNome(obj.getNome());
 	}
 	
 }
