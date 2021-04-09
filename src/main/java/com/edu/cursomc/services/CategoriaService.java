@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.edu.cursomc.domain.Categoria;
 import com.edu.cursomc.dto.CategoriaDTO;
 import com.edu.cursomc.repositories.CategoriaRepository;
-import com.edu.cursomc.services.exceptions.DataIntegrityExceptionException;
+import com.edu.cursomc.services.exceptions.DataIntegrityException;
 import com.edu.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -43,7 +43,7 @@ public class CategoriaService {
 		try {
 			dao.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new DataIntegrityExceptionException("Não é possível excluir categoria que contem produtos vinculados.");
+			throw new DataIntegrityException("Não é possível excluir categoria que contem produtos vinculados.");
 		}
 		
 	}
